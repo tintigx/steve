@@ -23,8 +23,9 @@
     <%@ include file="../00-cp-single.jsp" %>
     <section><span>Parameters</span></section>
     <table class="userInput">
-        <tr><td>Connector ID:</td>
-            <td><form:select path="connectorId" disabled="true" /></td>
+        <tr>
+			<td>Connector ID:</td>
+            <td><form:input path="connectorId" placeholder="if empty, 0 = charge point as a whole"/></td>
         </tr>
         <tr><td>Expiry Date/Time:</td>
             <td>

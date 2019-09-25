@@ -80,27 +80,28 @@ public class CentralSystemService16_Service {
 
         if (isRegistered) {
             log.info("The chargebox '{}' is registered and its boot acknowledged.", chargeBoxIdentity);
-            UpdateChargeboxParams params =
-                    UpdateChargeboxParams.builder()
-                                         .ocppProtocol(ocppProtocol)
-                                         .vendor(parameters.getChargePointVendor())
-                                         .model(parameters.getChargePointModel())
-                                         .pointSerial(parameters.getChargePointSerialNumber())
-                                         .boxSerial(parameters.getChargeBoxSerialNumber())
-                                         .fwVersion(parameters.getFirmwareVersion())
-                                         .iccid(parameters.getIccid())
-                                         .imsi(parameters.getImsi())
-                                         .meterType(parameters.getMeterType())
-                                         .meterSerial(parameters.getMeterSerialNumber())
-                                         .chargeBoxId(chargeBoxIdentity)
-                                         .heartbeatTimestamp(now)
-                                         .build();
-
-            ocppServerRepository.updateChargebox(params);
         } else {
             log.error("The chargebox '{}' is NOT registered and its boot NOT acknowledged.", chargeBoxIdentity);
         }
 
+        UpdateChargeboxParams params =
+                UpdateChargeboxParams.builder()
+                                     .ocppProtocol(ocppProtocol)
+                                     .vendor(parameters.getChargePointVendor())
+                                     .model(parameters.getChargePointModel())
+                                     .pointSerial(parameters.getChargePointSerialNumber())
+                                     .boxSerial(parameters.getChargeBoxSerialNumber())
+                                     .fwVersion(parameters.getFirmwareVersion())
+                                     .iccid(parameters.getIccid())
+                                     .imsi(parameters.getImsi())
+                                     .meterType(parameters.getMeterType())
+                                     .meterSerial(parameters.getMeterSerialNumber())
+                                     .chargeBoxId(chargeBoxIdentity)
+                                     .heartbeatTimestamp(now)
+                                     .build();
+
+        ocppServerRepository.updateChargebox(params);
+        
         return new BootNotificationResponse()
                 .withStatus(isRegistered ? RegistrationStatus.ACCEPTED : RegistrationStatus.REJECTED)
                 .withCurrentTime(now)

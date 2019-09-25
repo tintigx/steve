@@ -47,6 +47,7 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     public void ocppStationBooted(String chargeBoxId, boolean isRegistered) {
         if (isDisabled(OcppStationBooted)) {
+        	log.info("ocppStationBooted: isDisabled = true");
             return;
         }
 
@@ -59,6 +60,7 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     public void ocppStationWebSocketConnected(String chargeBoxId) {
         if (isDisabled(OcppStationWebSocketConnected)) {
+        	log.info("OcppStationWebSocketConnected: isDisabled = true");
             return;
         }
 
@@ -70,6 +72,7 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     public void ocppStationWebSocketDisconnected(String chargeBoxId) {
         if (isDisabled(OcppStationWebSocketDisconnected)) {
+        	log.info("OcppStationWebSocketDisconnected: isDisabled = true");
             return;
         }
 
@@ -81,6 +84,7 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     public void ocppStationStatusFailure(String chargeBoxId, int connectorId, String errorCode) {
         if (isDisabled(OcppStationStatusFailure)) {
+        	log.info("OcppStationStatusFailure: isDisabled = true");
             return;
         }
 
@@ -93,6 +97,7 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     public void ocppTransactionStarted(String chargeBoxId, int transactionId, int connectorId) {
         if (isDisabled(OcppTransactionStarted)) {
+        	log.info("OcppTransactionStarted: isDisabled = true");
             return;
         }
 
@@ -104,6 +109,7 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     public void ocppTransactionEnded(String chargeBoxId, int transactionId) {
        if (isDisabled(OcppTransactionEnded)) {
+       		log.info("OcppTransactionEnded: isDisabled = true");
             return;
         }
 

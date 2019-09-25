@@ -62,16 +62,18 @@ public class OcppWebSocketUpgrader extends JettyRequestUpgradeStrategy {
         // -------------------------------------------------------------------------
 
         String chargeBoxId = getLastBitFromUrl(request.getURI().getPath());
-        if (chargePointHelperService.isRegistered(chargeBoxId)) {
-            attributes.put(AbstractWebSocketEndpoint.CHARGEBOX_ID_KEY, chargeBoxId);
-        } else {
-            // send only if the station is not registered, because otherwise, after the connection it will send a boot
-            // notification message and we handle the notifications for these normal cases in service classes already.
-            notificationService.ocppStationBooted(chargeBoxId, false);
+        attributes.put(AbstractWebSocketEndpoint.CHARGEBOX_ID_KEY, chargeBoxId);
 
-            throw new HandshakeFailureException("ChargeBoxId '" + chargeBoxId + "' is not registered");
-        }
-
+//        if (chargePointHelperService.isRegistered(chargeBoxId)) {
+//            attributes.put(AbstractWebSocketEndpoint.CHARGEBOX_ID_KEY, chargeBoxId);
+//        } else {
+//            // send only if the station is not registered, because otherwise, after the connection it will send a boot
+//            // notification message and we handle the notifications for these normal cases in service classes already.
+//            notificationService.ocppStationBooted(chargeBoxId, false);
+//
+//            throw new HandshakeFailureException("ChargeBoxId '" + chargeBoxId + "' is not registered");
+//        }
+        
         // -------------------------------------------------------------------------
         // 2. Route according to the selected protocol
         // -------------------------------------------------------------------------

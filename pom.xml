@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.rwth.idsg</groupId>
     <artifactId>steve</artifactId>
-    <version>3.4.5</version>
+    <version>3.4.9</version>
     <packaging>jar</packaging>
 
     <organization>
@@ -32,14 +32,14 @@
         <java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <jooq.version>3.15.3</jooq.version>
-        <cxf.version>3.4.4</cxf.version>
-        <spring.version>5.3.10</spring.version>
-        <spring.security.version>5.5.2</spring.security.version>
-        <mysql.jdbc.version>8.0.26</mysql.jdbc.version>
-        <jetty.version>9.4.43.v20210629</jetty.version>
-        <lombok.version>1.18.20</lombok.version>
-        <jackson.version>2.12.5</jackson.version>
+        <jooq.version>3.16.5</jooq.version>
+        <cxf.version>3.5.2</cxf.version>
+        <spring.version>5.3.19</spring.version>
+        <spring.security.version>5.6.2</spring.security.version>
+        <mysql.jdbc.version>8.0.28</mysql.jdbc.version>
+        <jetty.version>10.0.7</jetty.version>
+        <lombok.version>1.18.22</lombok.version>
+        <jackson.version>2.13.2</jackson.version>
 
         <!-- In Mysql: schema == database (http://dev.mysql.com/doc/refman/5.6/en/glossary.html#glos_schema) -->
         <jdbcUrl>jdbc:mysql://${db.ip}:${db.port}/${db.schema}?useSSL=true&amp;serverTimezone=UTC</jdbcUrl>
@@ -113,7 +113,7 @@
                     <properties>
                         <owner>${project.organization.name}</owner>
                         <year>${project.inceptionYear}</year>
-                        <currentYear>2021</currentYear>
+                        <currentYear>2022</currentYear>
                     </properties>
                     <excludes>
                         <exclude>**/*.txt</exclude>
@@ -166,18 +166,25 @@
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>3.10.1</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                 </configuration>
             </plugin>
 
+            <!-- We need min. this version for proper junit 5 support -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
+            </plugin>
+
             <!-- Static analysis and check style -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.15.0</version>
+                <version>3.16.0</version>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -226,7 +233,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>properties-maven-plugin</artifactId>
-                <version>1.0.0</version>
+                <version>1.1.0</version>
                 <executions>
                     <execution>
                         <phase>initialize</phase>
@@ -245,7 +252,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>3.3.0</version>
                 <executions>
                     <execution>
                         <id>copy-dependencies</id>
@@ -263,7 +270,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>3.2.2</version>
                 <configuration>
                     <archive>
                         <manifest>
@@ -299,7 +306,7 @@
             <plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
-                <version>7.15.0</version>
+                <version>8.5.9</version>
 
                 <!-- Must be in the same phase as Jooq -->
                 <executions>
@@ -459,7 +466,7 @@
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-bom</artifactId>
-                <version>2.14.1</version>
+                <version>2.17.2</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -485,7 +492,7 @@
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
-            <version>22.0.0</version>
+            <version>23.0.0</version>
             <scope>compile</scope>
         </dependency>
 
@@ -498,7 +505,7 @@
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
-            <version>2.10.10</version>
+            <version>2.10.14</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate.validator</groupId>
@@ -508,12 +515,12 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>30.1.1-jre</version>
+            <version>31.1-jre</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>${jackson.version}</version>
+            <version>2.13.2.2</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
@@ -578,12 +585,12 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.32</version>
+            <version>1.7.36</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
-            <version>1.7.32</version>
+            <version>1.7.36</version>
         </dependency>
         <dependency>
             <groupId>com.lmax</groupId>
@@ -646,7 +653,7 @@
         </dependency>
         <dependency>
             <groupId>org.eclipse.jetty.websocket</groupId>
-            <artifactId>websocket-server</artifactId>
+            <artifactId>websocket-jetty-server</artifactId>
             <version>${jetty.version}</version>
         </dependency>
 
@@ -659,7 +666,7 @@
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
-            <version>5.0.0</version>
+            <version>5.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.jooq</groupId>
@@ -674,9 +681,21 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
+            <groupId>org.eclipse.jetty.websocket</groupId>
+            <artifactId>websocket-jetty-client</artifactId>
+            <version>${jetty.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.8.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>5.8.2</version>
             <scope>test</scope>
         </dependency>
 
